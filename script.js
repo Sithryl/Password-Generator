@@ -1,7 +1,7 @@
 // make character arrays
 
 var lowerCase = 'abcdefghijklmnopqrstuvwxyz';
-var upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWYZ';
+var upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var specialChars = '!@#$%^&*-=+_';
 var numbers = '1234567890';
 
@@ -16,8 +16,8 @@ window.alert("Hey! Let's make a password");
 function passGenerator() {
   var passArray = "";
   var password = "";
-  // make sure they choose correct length
-  // if they dont put anything
+
+// if they dont put anything
   var numChar = window.prompt("How many characters do you want to have?");
   if (numChar === null) {
     return;
@@ -50,6 +50,7 @@ function passGenerator() {
   if (addnumbers) {
     passArray = passArray.concat(numbers);
   }
+  // add alert if nothing was picked
   if (!addLowerCase && !addUppercase && !addSpecial && !addnumbers)
     window.alert("You must select at least 1 option!")
   // randomize characters for password
