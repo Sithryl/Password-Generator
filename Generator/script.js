@@ -1,59 +1,76 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
-
-// 
 // make character arrays
 
-var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", 
-"m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var UpperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", 
-"M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-var specialChars = ["!", "@", "#", "$", "%", "^", "&", "*", "?", "+", "-", "=", "_"];
-var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+var lowerCase = 'abcdefghijklmnopqrstuvwxyz';
+var upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWYZ';
+var specialChars = '!@#$%^&*-=+_';
+var numbers = '1234567890';
 
-// prompt user to pick what type of characters they want
+
+// prompt user to make a password
 
 window.alert("Hey! Let's make a password");
 
-var numChar = window.prompt("How many characters do you want to have?")
-var addLowerCase = window.confirm("Do you want to add lower case letters?");
-var addUppercase = window.confirm("Do you want to add upper case letters?");
-var addSpecial = window.confirm("Do you want to add special characters?");
-var addnumbers = window.confirm("Do you want to add numbers to your password?");
+
 
 // add password combinations
+function passGenerator() {
+  var passArray = "";
+  var password = "";
+  // make sure they choose correct length
+  // if they dont put anything
+  var numChar = window.prompt("How many characters do you want to have?");
+  if (numChar === null) {
+    return;
+  }
+  // if they dont put in a number
+  if (isNaN(numChar)) {
+    alert("Must be a number!")
+  }
+  // if it is too short or long
+  if (numChar < 8 || numChar > 128) {
+    alert("Must be at between 8 and 128 characters!");
+    writePassword()
+  }
+// add character type conffirmation prompts
+  var addLowerCase = window.confirm("Do you want to add lower case letters?");
+  var addUppercase = window.confirm("Do you want to add upper case letters?");
+  var addSpecial = window.confirm("Do you want to add special characters?");
+  var addnumbers = window.confirm("Do you want to add numbers to your password?");
 
-if (numChar < 8 || > 128){
-  window.alert("Password must be at least 8 Characters and no more than 128")
-  writePassword();
-} 
-else if (addLowerCase && addUppercase && addSpecial && addnumbers) {
-  var mixPassword = lowerCase.concat(UpperCase, specialChars, numbers);
-  console.log(mixPassword)
-} 
-else if (addLowerCase && addSpecial && addnumbers) {
-  var mixPassword = lowerCase.concat(specialChars, numbers);
+// combine combinations
+  if (addLowerCase) {
+    passArray = passArray.concat(lowerCase);
+  }
+  if (addUppercase) {
+    passArray = passArray.concat(upperCase);
+  }
+  if (addSpecial) {
+    passArray = passArray.concat(specialChars);
+  }
+  if (addnumbers) {
+    passArray = passArray.concat(numbers);
+  }
+  if (!addLowerCase && !addUppercase && !addSpecial && !addnumbers)
+    window.alert("You must select at least 1 option!")
+  // randomize characters for password
+  for (var i = 0; i < numChar; i++) {
+    var index = Math.floor(Math.random() * passArray.length);
+    password += passArray.substring(index, index + 1);
+  } 
+  return password;
 }
-else if (addLowerCase && addUppercase && addnumbers) {
-  var mixPassword = lowerCase.concat(UpperCase, numbers);
-  console.log(mixPassword)
-} 
-else if (addLowerCase && addUppercase && addSpecial) {
-  var mixPassword = lowerCase.concat(UpperCase, specialChars);
-  console.log(mixPassword)
-} 
-else if (addLowerCase && addUppercase && addSpecial && addnumbers) {
-  var mixPassword = lowerCase.concat(UpperCase, specialChars, numbers);
-  console.log(mixPassword)
-} 
-// Write password to the #password input
+
+// Assignment Code
+var generateBtn = document.querySelector("#generate");
+
+// add new password to the textbox\
 function writePassword() {
-  var password = generatePassword();
+  var masterPass = passGenerator();
   var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
+  passwordText.value = masterPass;
 }
+
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
