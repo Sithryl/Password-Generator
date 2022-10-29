@@ -51,8 +51,10 @@ function passGenerator() {
     passArray = passArray.concat(numbers);
   }
   // add alert if nothing was picked
-  if (!addLowerCase && !addUppercase && !addSpecial && !addnumbers)
+  if (!addLowerCase && !addUppercase && !addSpecial && !addnumbers) {
     window.alert("You must select at least 1 option!")
+    passGenerator();
+  }
   // randomize characters for password
   for (var i = 0; i < numChar; i++) {
     var index = Math.floor(Math.random() * passArray.length);
