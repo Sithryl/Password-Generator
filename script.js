@@ -1,6 +1,6 @@
 // make character arrays
 
-var lowerCase = 'abcdefghijklmnopqrstuvwxyz';
+var lowerCase = 'abcdefghijklmnopqrstuvwxyz'; 
 var upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var specialChars = '!@#$%^&*-=+_';
 var numbers = '1234567890';
